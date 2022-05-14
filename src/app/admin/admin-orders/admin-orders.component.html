@@ -1,0 +1,30 @@
+<h5> Hello Admin.......All orders is present below....Please click the view button to know order details</h5>
+
+<table class="table" *ngIf="userId">
+    <thead>
+        <tr>
+            <th>Title</th>
+            <th>Date</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        <!------tr *ngFor="let p of products$$ | async">
+            <td>{{p.payload.val().title}}</td>
+            <td>{{p.payload.val().price}}</td>
+            <td>
+                <a [routerLink]="['/admin/products/',p.key]">EDIT</a>
+            </td>
+        </tr>
+        ---->
+        <tr *ngFor="let p of orders$ | async">
+        <ng-container *ngIf="p.payload.val().userId">
+        <td>{{p.payload.val().userId}}</td>
+        <td>{{p.payload.val().datePlaced}}-{{p.payload.val().monthPlaced}}-{{p.payload.val().yearPlaced}}-{{p.payload.val().timePlaced}}</td>
+        <td>
+            <a [routerLink]="['/vieworders/',p.key]">view</a>
+        </td>
+        </ng-container>
+    </tr>
+    </tbody>
+</table>

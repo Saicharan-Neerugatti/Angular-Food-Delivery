@@ -1,0 +1,19 @@
+<h2>HERE YOU GO.........Order details</h2>
+
+<p>Account Holder :- {{orders?.userId}}</p>
+<p>Date of order :-  {{orders?.datePlaced}}-{{orders?.monthPlaced}}-{{orders?.yearPlaced}}-{{orders?.timePlaced}}</p>
+<p>Address Line1 :- {{orders?.shipping?.addressLine1}}</p>
+<p>Address Line2 :- {{orders?.shipping?.addressLine2}}</p>
+<p>City Name :- {{orders?.shipping?.city}}</p>
+<p>Order recieved to :- {{orders?.shipping?.name}}</p>
+<h4> Products which you ordered::::</h4>
+<ng-container *ngFor="let p of totalItemsCount">
+    <li class="list-group-item" *ngIf="orders?.items[p].quantity != 0">
+        {{orders?.items[p].quantity}} x {{ orders?.items[p].product.title}}
+        <div class="float-right">
+        {{orders?.items[p].product.price * orders?.items[p].quantity | currency:'USD':true}}  
+        </div>
+    </li>
+</ng-container>
+
+

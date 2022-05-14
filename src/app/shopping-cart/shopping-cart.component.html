@@ -1,0 +1,53 @@
+<h4 class="sai"> Hello User!!! The products which you selected is present here ....please update the quantity of products if you want </h4>
+
+<p>
+    You have {{ shoppingCartItemCount}} items in your shopping cart.
+    <button 
+       *ngIf="shoppingCartItemCount"
+       (click)="clearCart()"
+       class="btn btn-light btn-sm">Clear Cart</button>
+</p>
+<ng-container *ngIf="carts">
+<table class="table">
+    <thead>
+        <th>Image</th>
+        <th>product</th>
+        <th>Quantity</th>
+        <th style="text-align: center;">UpdateQuantity</th>
+        <th></th>
+        <th>price</th>
+    </thead>
+    <tbody>
+        <tr *ngFor="let p of totalItemsCount">
+            <ng-container *ngIf="carts.items[p].quantity !== 0">  
+
+            <td><img [src]="carts.items[p].product.imageUrl" class="thumbnail"></td>
+            <td>{{carts.items[p].product.title}}</td>
+            <td>{{carts.items[p].quantity}}</td>
+            <td>
+                <app-product-quantity [product]="carts.items[p].product" [shopping-cart]="carts"></app-product-quantity>
+            </td>
+            <td></td>
+            <td>{{carts.items[p].product.price * carts.items[p].quantity | currency:'USD':true}}</td>
+              </ng-container>
+       
+        </tr>
+    </tbody>
+    <tfoot>
+        <tr>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th>{{sum | currency:'USD':true}}</th>
+        </tr>
+    </tfoot>
+</table>
+<h5>Please click the check-out button to provide the address details and place the order</h5>
+<a
+*ngIf="shoppingCartItemCount"
+routerLink="/check-out"
+class="btn btn-primary">check-out</a>
+</ng-container>
+

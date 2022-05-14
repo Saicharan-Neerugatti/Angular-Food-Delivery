@@ -1,0 +1,61 @@
+<h5 class="sai">
+  Hi User!!! This is N SAICHARAN .....Please select the categories and add the products in to your cart and go to shopping-cart page....place the order@@
+</h5>
+
+<div class="row">
+    <div class="col-3">
+      <div class="sticky-top">
+        <!--------- below code moved to product filer and and used that componet instead of this code---->
+        <div class="list-group">
+            <a
+             class="list-group-item list-group-item-action"
+             [class.active]="!cat"
+             routerLink="/"
+             >
+            All items</a>
+            <a 
+            *ngFor="let c of categories$ | async" 
+            routerLink="/"
+            [queryParams]="{ category : c.key }"
+            class="list-group-item list-group-item-action"
+            [class.active]="cat === c.key"
+            >
+                {{ c.payload.val().name}}
+            </a>
+        </div>
+      </div>
+    <!-------
+     <product-filter></product-filter> 
+     --->   
+    </div>
+    <div class="col-9">
+        <div class="container">
+            <div class="row">
+                <ng-container *ngFor="let p of filteredProducts; let i = index">
+                <div class="col">
+                    <app-product-card [product]="p" [shopping-cart]="carts"></app-product-card>
+
+                    <!--------moved the below code to new component and render that component here to future purpose-
+                    <div class="card" style="width: 23rem;">
+                    <img [src]="p.imageUrl" class="card-img-top" alt="image here">
+                      <div class="card-body">
+                      <h5 class="card-title">{{p.title}}</h5>
+                      <p class="card-text">{{ p.price | currency:'USD': true}}</p>
+                      </div>
+                      <div class="card-footer">
+                        <button 
+                         (click)="addToCart(p)"
+                         class="btn btn-primary btn-block">Add to Cart</button>
+                      </div>
+                      <div>{{ quants }}</div>
+                    </div>
+                    --------->
+
+                </div>
+                <div *ngIf="(i + 1) % 2 === 0" class="w-100"></div>
+                </ng-container>
+            </div>
+        </div> 
+    </div>
+</div>
+

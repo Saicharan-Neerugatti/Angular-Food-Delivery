@@ -1,0 +1,35 @@
+<div class="card" style="width: 23rem;">
+    <img [src]="product.imageUrl" class="card-img-top" alt="image here">
+      <div class="card-body">
+      <h5 class="card-title">{{product.title}}</h5>
+      <p class="card-text">{{ product.price | currency:'USD': true}}</p>
+      </div>
+      <div class="card-footer">
+        <button 
+         *ngIf="getQuantity() === 0; else updateQuantity"
+         (click)="addToCart(product)"
+         class="btn btn-secondary btn-block">Add to Cart</button>
+         <ng-template #updateQuantity>
+           <app-product-quantity [product]="product" [shopping-cart]="shoppingCart"></app-product-quantity>
+           <!------move th beloww code to product quantity -- and use product and shoppingcart input names from TS file
+                                                                  and assign those values inot productqunatity component
+           <div class="row no-gutters">
+               <div class="col-2">
+                   <button 
+                   (click)="reduceTheCart(product)"
+                   class="btn btn-secondary btn-block">-</button>
+               </div>
+               <div class="col text-center">
+                   {{ getQuantity() }} in cart
+               </div>
+               <div class="col-2">
+                    <button 
+                    (click)="addToCart(product)"
+                    class="btn btn-secondary btn-block">+</button>
+            </div>
+           </div>
+           ------>
+         </ng-template>
+       
+      </div>
+</div>
